@@ -33,68 +33,24 @@ const work = await Promise.all(
 );
 ---
 
-<PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
+<PageLayout title={HOME.TITLE}>
   <Container>
-    <h4 class="animate font-semibold text-black dark:text-white">
+    <h4 class="animate font-bold text-black dark:text-white">
       Hello! <span class="text-xl">👋🏻</span>
     </h4>
     <div class="space-y-16">
       <section>
-        <!-- <article class="space-y-4">
-          <p class="animate">
-            I am a minimal, seo friendly, accessible portfolio and blog for
-            developers. I am an even more lightweight version of my popular
-            theme
-            <Link
-              href="https://github.com/markhorn-dev/astro-sphere"
-              aria-label="Astro Sphere on Github"
-              external
-            >
-              Astro Sphere
-            </Link>. I have a lighthouse scores of 100 across the board for
-            performance, accesibility, best practices and SEO.
-          </p>
-          <p class="animate">
-            I come packed with full type safety, a sitemap, an rss feed,
-            markdown and mdx support (use components in your markdown) through
-            astro integrations. I am styled with tailwind and come preconfigured
-            with light, dark and system/os theme preferences out of the box.
-          </p>
-          <p class="animate">
-            Visit
-            <Link
-              href="https://github.com/markhorn-dev/astro-nano"
-              aria-label="Astro Nano on Github"
-              external
-            >
-              Astro Nano on Github
-            </Link>
-            to fork the repository, read the docs or one-click deploy on Vercel or
-            Netlify.
-          </p>
-        </article> -->
-
         <article class="space-y-4">
           <p class="animate">
-            I am Saquib and I have a passion for Cloud Computing ☁️, Data
-            Analytics 🗄️ and all the Developer stuff 📟! I am currently pursuing
-            a Masters Degree in Information Technology 🚀 from George Mason
-            University 🏫.
-          </p>
-          <p class="animate">
-            I am constantly learning new cloud and container technologies to
-            become a better cloud developer ☁️. I was recently endored by
-            Forrest Brazzel (AWS Serverless Hero) for AWS on LinkedIn for my
-            cloud projects. I am also actively learning JAVA and Serverless
-            Framwork to work on my next big porject! I enjoy playing FPS games
-            🎮 mainly CS:GO and Call of Duty 🕹️, so if you are interested in
-            competing against me, feel free to hit me up 👍!
-          </p>
-          <p class="animate">
-            I speak four languages fluently 🇺🇸 🇧🇩 🇮🇳 🇵🇰 and know a little bit of
-            Spanish 🇪🇸. I’m interested in just about any topic and very much
-            open to thoughtful conversations. 🍺 Hit me up at
-            nsaquib96@gmail.com and let’s chat about stuff!
+            Welcome to my corner of the web! I'm Saquib, a tech enthusiast with
+            a deep passion for Cloud Computing, Containerization, Data
+            Analytics, and all things development. I'm constantly diving into
+            new technologies to grow as a cloud developer. Recently endorsed by
+            AWS Serverless Hero Forrest Brazzel for my cloud projects, I'm
+            currently exploring Java and the Serverless Framework for my next
+            big idea. When I'm not coding, you'll find me in the world of FPS
+            games like CS and Call of Duty. Let's chat about tech, gaming, or
+            anything else—reach out at nsaquib96@gmail.com! 👍
           </p>
         </article>
       </section>
@@ -117,49 +73,6 @@ const work = await Promise.all(
         </ul>
       </section>
 
-      <!-- <section class="animate space-y-6">
-        <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">Latest posts</h5>
-          <Link href="/blog"> See all posts </Link>
-        </div>
-        <ul class="flex flex-col gap-4">
-          {
-            blog.map((post) => (
-              <li>
-                <ArrowCard entry={post} />
-              </li>
-            ))
-          }
-        </ul>
-      </section> -->
-
-      <!-- <section class="animate space-y-6">
-        <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
-            Work Experience
-          </h5>
-          <Link href="/work"> See all work </Link>
-        </div>
-        <ul class="flex flex-col space-y-4">
-          {
-            work.map((entry) => (
-              <li>
-                <div class="text-sm opacity-75">
-                  {dateRange(entry.data.dateStart, entry.data.dateEnd)}
-                </div>
-                <div class="font-semibold text-black dark:text-white">
-                  {entry.data.company}
-                </div>
-                <div class="text-sm opacity-75">{entry.data.role}</div>
-                <article>
-                  <entry.Content />
-                </article>
-              </li>
-            ))
-          }
-        </ul>
-      </section> -->
-
       <br />
       <br />
       <br />
@@ -167,8 +80,8 @@ const work = await Promise.all(
         <h5 class="font-semibold text-black dark:text-white">Let's Connect</h5>
         <article>
           <p>
-            I am pursuing new opportunities 🔍 and can be reached through this
-            profile 💻, or by email.
+            I am pursuing new opportunities and can be reached through the
+            socals below or by email.
           </p>
         </article>
         <ul class="flex flex-wrap gap-2">
