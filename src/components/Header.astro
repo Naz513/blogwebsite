@@ -8,15 +8,16 @@ import { SITE } from "@consts";
   <Container>
     <div class="flex flex-wrap gap-y-2 justify-between">
       <Link href="/" underline={false}>
-        <div class="font-semibold">
-          {SITE.NAME}
+        <div
+          class="font-bold text-xl tracking-tighter lowercase flex items-center"
+        >
+          <span>&gt;</span>
+          <span class="ml-2">mohdsaquib</span>
+          <span class="text-pink-600">|</span>
         </div>
       </Link>
-      <nav class="flex gap-1">
-        <!-- <Link href="/blog"> blog </Link>
-        <span>
-          {`/`}
-        </span> -->
+
+      <nav class="flex gap-2">
         <Link href="/projects"> projects </Link>
         <span>
           {`/`}
