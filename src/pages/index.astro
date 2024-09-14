@@ -35,6 +35,23 @@ const work = await Promise.all(
 
 <PageLayout title={HOME.TITLE}>
   <Container>
+    <section
+      class="flex flex-col items-center justify-center py-10 bg-black text-white"
+    >
+      <div class="animate w-20 h-20 rounded-full overflow-hidden mb-6">
+        <img
+          src="library_project.jpg"
+          alt="Profile Image"
+          class="object-cover w-full h-full"
+        />
+      </div>
+      <h1 class="animate text-xl font-bold text-center">Mohd Saquib</h1>
+      <p class="animate text-sm mt-4 text-center">Cloud Solution Architect</p>
+      <p class="animate text-sm text-center text-gray-400 mt-2">
+        Washington DC, USA
+      </p>
+    </section>
+
     <h4 class="animate text-2xl font-bold text-black dark:text-white">
       Hello! <span class="text-2xl">👋🏻</span>
     </h4>
