@@ -51,6 +51,7 @@ article {
   }
   article a:hover {
     @apply text-black dark:text-white;
+    /* @apply text-black dark:text-pink-400; */
     @apply decoration-black/25 dark:decoration-white/50;
   }
 }
