@@ -3,6 +3,7 @@ company: "Healthy Directions"
 role: "Functional Analyst"
 dateStart: "02/01/2019"
 dateEnd: "02/20/2020"
+location: "Bethesda, MD"
 ---
 - Collaborated with various departments to enhance end-user experience, defined business requirements and functional specifications.
 - Supported four departments, serving as a supply chain management expert.

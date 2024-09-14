@@ -1,8 +1,9 @@
 ---
 company: "Booz Allen Hamilton"
-role: "Consultant"
+role: "Cloud Solutions Architect, Consultant"
 dateStart: "02/20/2021"
 dateEnd: "Current"
+location: "Remote"
 ---
 - Designed, developed, and tested containers and cloud solution components in OpenShift, Kubernetes, and AWS, adhering to design standards and solving routine problems of limited scope and complexity.
 - Created 12 event-driven reports on AWS using Lambda, S3, RDS, EventBridge, and QuickSight for key insights and historical data analysis, utilizing Python, MySQL, and NodeJS, eliminating 100% of manual processes.
