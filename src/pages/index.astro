@@ -7,6 +7,7 @@ import Link from "@components/Link.astro";
 import { dateRange } from "@lib/utils";
 import { SITE, HOME, SOCIALS } from "@consts";
 import FrontCard from "@components/FrontCard.astro";
+import HomeIntroSection from "@components/HomeIntroSection.astro";
 
 const blog = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
@@ -42,21 +43,7 @@ const work = await Promise.all(
       Hello! <span>👋🏻</span>
     </h4>
     <div class="space-y-16">
-      <section>
-        <article class="space-y-4 text-lg">
-          <p class="animate tracking-normal">
-            Welcome to my corner of the web! I'm Saquib, a tech enthusiast with
-            a deep passion for Cloud Computing, Containerization, Data
-            Analytics, and all things development. I'm always diving into new
-            technologies to level up as a cloud developer. I've been recognized
-            for my work and even endorsed by AWS Serverless Hero Forrest
-            Brazzel. When I'm not coding, you'll find me traveling or playing
-            soccer. Let's chat about tech, gaming, sports, or anything else—feel
-            free to reach out at nsaquib96@gmail.com! 👍
-          </p>
-        </article>
-      </section>
-
+      <HomeIntroSection />
       <section class="animate space-y-6">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
           <h5 class="font-semibold text-black dark:text-white">
