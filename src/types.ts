@@ -6,6 +6,11 @@ export type Site = {
   NUM_PROJECTS_ON_HOMEPAGE: number;
 };
 
+export type Info = {
+  LOCATION: string;
+  TITLE: string;
+};
+
 export type Metadata = {
   TITLE: string;
   DESCRIPTION: string;

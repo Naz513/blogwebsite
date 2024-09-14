@@ -1,4 +1,4 @@
-import type { Site, Metadata, Socials } from "@types";
+import type { Site, Info, Metadata, Socials } from "@types";
 
 export const SITE: Site = {
   NAME: "Mohd Saquib",
@@ -6,6 +6,11 @@ export const SITE: Site = {
   NUM_POSTS_ON_HOMEPAGE: 3,
   NUM_WORKS_ON_HOMEPAGE: 2,
   NUM_PROJECTS_ON_HOMEPAGE: 3,
+};
+
+export const INFO: Info = {
+  LOCATION: "WAshington DC, US",
+  TITLE: "Cloud Solutions Architect",
 };
 
 export const HOME: Metadata = {

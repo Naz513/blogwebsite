@@ -1,0 +1,20 @@
+---
+import { SITE, INFO } from "@consts";
+---
+
+<section
+    class="flex flex-col items-center justify-center py-10 bg-black text-white"
+>
+    <div class="animate w-20 h-20 rounded-full overflow-hidden mb-6">
+        <img
+            src="library_project.jpg"
+            alt="Profile Image"
+            class="object-cover w-full h-full"
+        />
+    </div>
+    <h1 class="animate text-xl font-bold text-center">{SITE.NAME}</h1>
+    <p class="animate text-sm mt-4 text-center">{INFO.TITLE}</p>
+    <p class="animate text-sm text-center text-gray-400 mt-2">
+        {INFO.LOCATION}
+    </p>
+</section>
