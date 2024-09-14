@@ -6,16 +6,15 @@ import { SITE } from "@consts";
 
 type Props = {
   title: string;
-  description: string;
 };
 
-const { title, description } = Astro.props;
+const { title } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <Head title={`${title} | ${SITE.NAME}`} description={description} />
+    <Head title={`${title} | ${SITE.NAME}`} />
   </head>
   <body>
     <Header />
