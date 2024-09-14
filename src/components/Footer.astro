@@ -1,12 +1,15 @@
 ---
 import Container from "@components/Container.astro";
 import { SITE } from "@consts";
+
+const currentYear = new Date().getFullYear();
 ---
 
 <footer class="animate">
   <Container>
     <div class="flex justify-between place-items-center">
-      &copy; 2024 {`|`}
+      &copy; {currentYear}
+      {`|`}
       {SITE.NAME}
     </div>
   </Container>

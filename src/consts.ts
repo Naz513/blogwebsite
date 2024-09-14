@@ -15,29 +15,21 @@ export const INFO: Info = {
 
 export const HOME: Metadata = {
   TITLE: "Home",
-  DESCRIPTION: "Welcome to my blog and portfolio.",
 };
 
 export const BLOG: Metadata = {
   TITLE: "Blog",
-  DESCRIPTION: "A collection of articles and projets that I have worked on.",
 };
 
 export const WORK: Metadata = {
   TITLE: "Work",
-  DESCRIPTION: "Where I have worked and what I have done.",
 };
 
 export const PROJECTS: Metadata = {
   TITLE: "Projects",
-  DESCRIPTION: "A collection of my projects, with links to repositories and demos.",
 };
 
 export const SOCIALS: Socials = [
-  // { 
-  //   NAME: "twitter-x",
-  //   HREF: "https://twitter.com/markhorn_dev",
-  // },
   { 
     NAME: "github",
     HREF: "https://github.com/Naz513"
