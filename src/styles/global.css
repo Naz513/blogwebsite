@@ -34,7 +34,7 @@ main {
 }
 
 footer {
-  @apply py-10 text-sm;
+  @apply py-10;
 }
 
 article {
