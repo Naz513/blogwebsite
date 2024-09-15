@@ -21,6 +21,12 @@ type Props = CollectionEntry<"projects">;
 
 const project = Astro.props;
 const { Content } = await project.render();
+
+let tags = project.data.tags || [];
+
+if (typeof tags === "string") {
+  tags = [tags];
+}
 ---
 
 <PageLayout title={project.data.title}>
@@ -58,6 +64,15 @@ const { Content } = await project.render();
           </nav>
         )
       }
+      <div class="animate pt-2">
+        {
+          tags.map((tag) => (
+            <span class="bg-pink-500 rounded-md text-xs text-black inline-block px-2 py-1 m-1">
+              {tag}
+            </span>
+          ))
+        }
+      </div>
     </div>
     <article class="animate">
       <Content />
