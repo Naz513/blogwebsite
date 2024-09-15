@@ -22,16 +22,21 @@ const work = await Promise.all(
   <Container>
     <div class="space-y-10">
       <div class="animate font-semibold text-black dark:text-white">Work</div>
-      <ul class="flex flex-col space-y-4">
+      <ul class="flex flex-col space-y-5">
         {
           work.map((entry) => (
             <li class="animate">
-              <div class="text-sm opacity-75">
-                {dateRange(entry.data.dateStart, entry.data.dateEnd)}
-              </div>
-              <div class="text-lg font-semibold text-black dark:text-white">
-                {entry.data.company}
-                <span class="text-xs opacity-75">({entry.data.location})</span>
+              {/* Apply flex only for medium and larger screens */}
+              <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+                <div class="text-lg font-semibold text-black dark:text-white">
+                  {entry.data.company}
+                  <span class="text-xs opacity-75">
+                    ({entry.data.location})
+                  </span>
+                </div>
+                <div class="text-sm opacity-75 text-left md:text-right mt-2 md:mt-0">
+                  {dateRange(entry.data.dateStart, entry.data.dateEnd)}
+                </div>
               </div>
               <div class="text-sm opacity-75">{entry.data.role}</div>
               <article>

@@ -17,9 +17,9 @@ export const HOME: Metadata = {
   TITLE: "Home",
 };
 
-export const BLOG: Metadata = {
-  TITLE: "Blog",
-};
+// export const BLOG: Metadata = {
+//   TITLE: "Blog",
+// };
 
 export const WORK: Metadata = {
   TITLE: "Work",
