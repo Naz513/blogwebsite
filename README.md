@@ -1,4 +1,4 @@
-# 🌟 Astro Tailwind TypeScript Website
+# 🌟 mohdsaquib.com | A blog Website using Astro
 
 This project is a static website built with modern tools like [Astro](https://astro.build/), [Tailwind CSS](https://tailwindcss.com/), and [TypeScript](https://www.typescriptlang.org/). It's designed to be fast, responsive, and scalable! 🚀
 
