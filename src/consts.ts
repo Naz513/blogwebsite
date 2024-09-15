@@ -9,7 +9,7 @@ export const SITE: Site = {
 };
 
 export const INFO: Info = {
-  LOCATION: "WAshington DC, US",
+  LOCATION: "Virginia, US",
   TITLE: "Cloud Solutions Architect",
 };
 
