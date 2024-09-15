@@ -21,14 +21,14 @@ const work = await Promise.all(
 <PageLayout title={WORK.TITLE}>
   <Container>
     <div class="space-y-10">
-      <div class="animate font-semibold text-black dark:text-white">Work</div>
+      <div class="animate font-semibold text-white">Work</div>
       <ul class="flex flex-col space-y-5">
         {
           work.map((entry) => (
             <li class="animate">
               {/* Apply flex only for medium and larger screens */}
               <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
-                <div class="text-lg font-semibold text-black dark:text-white">
+                <div class="text-lg font-semibold text-white">
                   {entry.data.company}
                   <span class="text-xs opacity-75">
                     ({entry.data.location})
