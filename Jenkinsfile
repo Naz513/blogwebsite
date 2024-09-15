@@ -29,8 +29,8 @@ pipeline {
 
     stage('Save Artifacts') {
       steps {
-        sh 'mkdir -p $WORKSPACE/blog'  // Create the target directory if it doesn't exist
-        sh 'cp -r ./dist $WORKSPACE/blog' // Copy the dist folder to the blog directory in the workspace
+        sh 'mkdir -p /Documents/blog'  // Create the target directory if it doesn't exist
+        sh 'cp -r ./dist /Documents/blog' // Copy the dist folder to the blog directory in the workspace
       }
     }
   }
