@@ -5,9 +5,4 @@ dateStart: "02/01/2019"
 dateEnd: "02/20/2020"
 location: "Bethesda, MD"
 ---
-- Collaborated with various departments to enhance end-user experience, defined business requirements and functional specifications.
-- Supported four departments, serving as a supply chain management expert.
-- Monitored performance, identified discrepancies, and proposed high-impact, cost-effective solutions.
-- Developed release notes and user guides with a team of 10 members in alignment with policies and best practices.
-- Automated reporting processes, boosting productivity 100% by eliminating manual processes in the generation of 20 reports.
-- Designed dashboards and reports for stakeholders using Looker business intelligence (BI) tool.
+Collaborated with multiple departments to enhance end-user experience by defining business requirements and functional specifications. Supported four departments as a supply chain management expert, monitoring performance, identifying discrepancies, and proposing high-impact, cost-effective solutions. Developed release notes and user guides alongside a team of 10 members, ensuring alignment with policies and best practices. Automated reporting processes, doubling productivity by eliminating manual steps in generating 20 reports. Additionally, designed dashboards and reports for stakeholders using Looker BI tools to provide actionable insights and data visualization.
