@@ -1,7 +1,7 @@
 ---
 title: "How I Built a Serverless Resume Website Using AWS CloudFormation"
 description: "Learn how to build a fully serverless resume website with AWS services."
-date: "Dec 28 2020"
+date: "Dec 13 2020"
 demoURL: "http://resume.mohdsaquib.com"
 repoURL: "https://github.com/Naz513/ServerlessResumeWebsite"
 tags: ["AWS", "Serverless", "CloudFormation", "Lambda", "S3", "DynamoDB", "API Gateway", "Cloud Computing", "DevOps"]

@@ -5,8 +5,6 @@ date: "Aug 28 2020"
 repoURL: "https://github.com/Naz513/mohdsaquib.com"
 tags: ["AWS", "S3", "Python", "Serverless", "Lambda", "DynamoDB", "AWS Glue"]
 ---
-![Cover Image](./cover.jpg)
-
 After earning my AWS SAA certification, I was eager to apply my skills in real-world projects. So, when I came across a challenge from A Cloud Guru, I jumped in without hesitation. The past few weeks have been a blend of fun and learning as I worked on this project, and I'm excited to share the experience.
 
 The goal was to build an ETL (Extract, Transform, Load) pipeline for COVID-19 data, sourced from The New York Times and John Hopkins University. Using Python and several AWS services, I built a solution that automates the collection, processing, and storage of this data.

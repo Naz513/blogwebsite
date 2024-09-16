@@ -1,5 +1,7 @@
 # 🌟 mohdsaquib.com | A blog site using Astro
 
+![FrontEnd of the Website](./newSite.png)
+
 This project is a static website built with modern tools like [Astro](https://astro.build/), [Tailwind CSS](https://tailwindcss.com/), and [TypeScript](https://www.typescriptlang.org/). It's designed to be fast, responsive, and scalable! 🚀
 
 ## ✨ Features
