@@ -3,10 +3,14 @@ import type { CollectionEntry } from "astro:content";
 import FormattedDate from "./FormattedDate.astro";
 
 type Props = {
-  entry: CollectionEntry<"blog"> | CollectionEntry<"projects">;
+  entry: CollectionEntry<"projects">;
 };
 
 const { entry } = Astro.props;
+
+let tags: string[] = Array.isArray(entry.data.tags)
+  ? entry.data.tags.slice(0, 5)
+  : [];
 ---
 
 <a
@@ -14,14 +18,28 @@ const { entry } = Astro.props;
   class="relative group flex flex-nowrap py-3 px-4 pr-10 rounded-lg border border-white/20 hover:bg-white/5 hover:text-white transition-colors duration-300 ease-in-out"
 >
   <div class="flex flex-col flex-1 truncate">
-    <div class="text-sm text-gray-200 pb-3">
-      <FormattedDate date={entry.data.date} />
+    <div class="flex items-center justify-between">
+      <div class="text-sm text-gray-200 mb-2">
+        <FormattedDate date={entry.data.date} />
+      </div>
     </div>
-    <div class="text-lg font-semibold">
+    <div class="text-base font-semibold">
       {entry.data.title}
     </div>
-    <div class="text-sm">
-      {entry.data.description}
+    <div class="flex flex-wrap items-center">
+      <div class="text-sm">
+        {entry.data.description}
+      </div>
+      <div class="flex flex-wrap mt-2">
+        {
+          tags.length > 0 &&
+            tags.map((tag: string) => (
+              <span class="bg-gray-400 rounded-md text-xs text-black inline-block px-2 py-1 mr-1 mt-1">
+                {tag}
+              </span>
+            ))
+        }
+      </div>
     </div>
   </div>
   <svg

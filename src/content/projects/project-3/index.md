@@ -4,7 +4,7 @@ description: "Learn how to build a fully serverless resume website with AWS serv
 date: "Dec 13 2020"
 demoURL: "http://resume.mohdsaquib.com"
 repoURL: "https://github.com/Naz513/ServerlessResumeWebsite"
-tags: ["AWS", "Serverless", "CloudFormation", "Lambda", "S3", "DynamoDB", "API Gateway", "Cloud Computing", "DevOps"]
+tags: ["CloudFormation", "Lambda", "S3", "DynamoDB", "API Gateway", "Cloud Computing", "DevOps", "AWS", "Serverless", ]
 ---
 
 ![FrontEnd of the Website](./resumewebsite.png)
