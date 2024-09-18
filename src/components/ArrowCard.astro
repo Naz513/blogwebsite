@@ -14,11 +14,11 @@ const { entry } = Astro.props;
   class="relative group flex flex-nowrap py-3 px-4 pr-10 rounded-lg border border-white/20 hover:bg-white/5 hover:text-white transition-colors duration-300 ease-in-out"
 >
   <div class="flex flex-col flex-1 truncate">
-    <div class="font-semibold">
-      {entry.data.title}
-    </div>
-    <div class="text-sm text-gray-200">
+    <div class="text-sm text-gray-200 pb-3">
       <FormattedDate date={entry.data.date} />
+    </div>
+    <div class="text-lg font-semibold">
+      {entry.data.title}
     </div>
     <div class="text-sm">
       {entry.data.description}
