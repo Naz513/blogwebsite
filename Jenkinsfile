@@ -29,8 +29,10 @@ pipeline {
 
     stage('Save Artifacts') {
       steps {
-        sh 'mkdir -p /Documents/blog'  // Create the target directory if it doesn't exist
-        sh 'cp -r ./dist /Documents/blog' // Copy the dist folder to the blog directory in the workspace
+        // SCP the artifacts to another computer
+        sh '''
+          scp -r ./dist naz@100.108.100.79:/blog
+        '''
       }
     }
   }
