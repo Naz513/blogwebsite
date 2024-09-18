@@ -1,5 +1,5 @@
 ---
-
+import { SITE } from "@consts";
 ---
 
 <section>
@@ -12,7 +12,11 @@
             for my work and even endorsed by AWS Serverless Hero Forrest
             Brazzel. When I'm not developing, you'll find me traveling or
             playing soccer. Let's chat about tech, gaming, sports, or anything
-            else—feel free to reach out at nsaquib96@gmail.com! 👍
+            else—feel free to reach out at <a
+                href={`mailto:${SITE.EMAIL}`}
+                class="hover:text-pink-500 transition-colors duration-300 ease-in-out cursor-pointer"
+                ">{SITE.EMAIL}!</a
+            > 👍
         </p>
     </article>
 </section>
