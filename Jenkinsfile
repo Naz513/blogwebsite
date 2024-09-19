@@ -30,29 +30,47 @@ pipeline {
             }
         }
 
+        stage('Configure Git Identity') {
+            steps {
+                // Configure the Git user name and email for Jenkins commits
+                sh 'git config user.name "Mohd Saquib"'
+                sh 'git config user.email "nsaquib96@gmail.com"'
+            }
+        }
+
         stage('Determine Version Bump') {
             steps {
                 script {
                     def commitMsg = sh(script: 'git log -1 --pretty=%B', returnStdout: true).trim()
 
-                    // Check if commit message contains 'BREAKING CHANGE', 'feat', or 'fix'
-                    if (commitMsg.contains('BREAKING CHANGE')) {
-                        echo 'Bumping Major version...'
-                        sh 'npm version major'
-                    } else if (commitMsg.startsWith('feat')) {
-                        echo 'Bumping Minor version...'
-                        sh 'npm version minor'
-                    } else if (commitMsg.startsWith('fix')) {
-                        echo 'Bumping Patch version...'
-                        sh 'npm version patch'
+                    if (commitMsg == null || commitMsg.trim().isEmpty()) {
+                        echo 'No commit message found. Skipping version bump.'
                     } else {
-                        echo 'No version bump required.'
+                        // Check if commit message contains 'BREAKING CHANGE', 'feat', or 'fix'
+                        if (commitMsg.contains('BREAKING CHANGE')) {
+                            echo 'Bumping Major version...'
+                            sh 'npm version major'
+                        } else if (commitMsg.startsWith('feat')) {
+                            echo 'Bumping Minor version...'
+                            sh 'npm version minor'
+                        } else if (commitMsg.startsWith('fix')) {
+                            echo 'Bumping Patch version...'
+                            sh 'npm version patch'
+                        } else {
+                            echo 'No version bump required.'
+                        }
                     }
                 }
             }
         }
 
         stage('Push Version and Tag to Git') {
+            when {
+                expression {
+                    def commitMsg = sh(script: 'git log -1 --pretty=%B', returnStdout: true).trim()
+                    return commitMsg.contains('BREAKING CHANGE') || commitMsg.startsWith('feat') || commitMsg.startsWith('fix')
+                }
+            }
             steps {
                 script {
                     def version = sh(script: "cat package.json | jq -r .version", returnStdout: true).trim()
