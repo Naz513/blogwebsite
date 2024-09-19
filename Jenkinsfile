@@ -8,7 +8,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 // Checkout the code using the correct Git credentials
-                git branch: 'main', credentialsId: 'your-credentials-id', url: 'https://github.com/Naz513/blogwebsite.git'
+                git branch: 'main', credentialsId: 'git-credentials', url: 'https://github.com/Naz513/blogwebsite.git'
             }
         }
 
@@ -65,20 +65,11 @@ pipeline {
         }
 
         stage('Push Version and Tag to Git') {
-            when {
-                expression {
-                    def commitMsg = sh(script: 'git log -1 --pretty=%B', returnStdout: true).trim()
-                    return commitMsg.contains('BREAKING CHANGE') || commitMsg.startsWith('feat') || commitMsg.startsWith('fix')
-                }
-            }
             steps {
                 script {
                     def version = sh(script: "cat package.json | jq -r .version", returnStdout: true).trim()
 
                     sh '''
-                      git config user.name "Jenkins CI"
-                      git config user.email "jenkins@ci.com"
-                      
                       git add package.json
                       git commit -m "chore(release): bump version to v${version}"
                       
