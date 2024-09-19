@@ -68,13 +68,15 @@ pipeline {
             steps {
                 script {
                     def version = sh(script: "cat package.json | jq -r .version", returnStdout: true).trim()
+
+                    // Check if the tag exists locally and delete it if needed
+                    def tagExists = sh(script: "git tag -l v${version}", returnStdout: true).trim()
                     
-                    // Check if the tag exists locally
-                    def localTagExists = sh(script: "git tag -l v${version}", returnStdout: true).trim()
-                    
-                    if (localTagExists) {
+                    if (tagExists) {
                         echo "Deleting local tag v${version}..."
                         sh "git tag -d v${version}"
+                    } else {
+                        echo "No local tag v${version} found."
                     }
                 }
             }
@@ -85,18 +87,14 @@ pipeline {
                 script {
                     def version = sh(script: "cat package.json | jq -r .version", returnStdout: true).trim()
 
-                    // Force the commit and tag push, using credentials
-                    withCredentials([usernamePassword(credentialsId: 'git-credentials', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+                    // Use credentials to push the tag
+                    withCredentials([usernamePassword(credentialsId: 'git-credentials', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                         sh '''
-                          git add package.json || true
-                          git commit -m "chore(release): bump version to v${version}" || true
-                          
-                          # Push changes and tag using credentials
-                          git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Naz513/blogwebsite.git main
-                          
-                          # Create the correct version tag
-                          git tag -a v${version} -m "Release v${version}"
-                          git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Naz513/blogwebsite.git v${version}
+                            git add package.json
+                            git commit -m "chore(release): bump version to v${version}" || true
+                            git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Naz513/blogwebsite.git main
+                            git tag -a v${version} -m "Release v${version}"
+                            git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Naz513/blogwebsite.git v${version}
                         '''
                     }
                 }
