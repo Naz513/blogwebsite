@@ -69,15 +69,22 @@ pipeline {
                 script {
                     def version = sh(script: "cat package.json | jq -r .version", returnStdout: true).trim()
 
-                    sh '''
-                      git add package.json
-                      git commit -m "chore(release): bump version to v${version}"
-                      
-                      # Push changes and tag
-                      git push origin main
-                      git tag -a v${version} -m "Release v${version}"
-                      git push origin v${version}
-                    '''
+                    // Check if the tag exists
+                    def tagExists = sh(script: "git tag -l v${version}", returnStdout: true).trim()
+                    
+                    if (tagExists) {
+                        echo "Tag v${version} already exists. Skipping tag creation."
+                    } else {
+                        sh '''
+                          git add package.json
+                          git commit -m "chore(release): bump version to v${version}"
+                          
+                          # Push changes and tag
+                          git push origin main
+                          git tag -a v${version} -m "Release v${version}"
+                          git push origin v${version}
+                        '''
+                    }
                 }
             }
         }
