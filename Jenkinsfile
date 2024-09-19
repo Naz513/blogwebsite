@@ -24,7 +24,6 @@ pipeline {
 
         stage('Install jq') {
             steps {
-                // Install jq if it's not already available
                 sh '''
                 if ! command -v jq &> /dev/null
                 then
@@ -37,7 +36,7 @@ pipeline {
 
         stage('Clean Working Directory') {
             steps {
-                // Ensure Git working directory is clean before bumping the version
+                // Clean local Git workspace before continuing
                 sh 'git reset --hard'
                 sh 'git clean -fdx'
             }
@@ -45,7 +44,6 @@ pipeline {
 
         stage('Configure Git Identity') {
             steps {
-                // Configure the Git user name and email for Jenkins commits
                 sh 'git config user.name "Mohd Saquib"'
                 sh 'git config user.email "nsaquib96@gmail.com"'
             }
@@ -59,7 +57,6 @@ pipeline {
                     if (commitMsg == null || commitMsg.trim().isEmpty()) {
                         echo 'No commit message found. Skipping version bump.'
                     } else {
-                        // Check if commit message contains 'BREAKING CHANGE', 'feat', or 'fix'
                         if (commitMsg.contains('BREAKING CHANGE')) {
                             echo 'Bumping Major version...'
                             sh 'npm version major'
@@ -77,27 +74,35 @@ pipeline {
             }
         }
 
+        stage('Delete Existing Local Tag') {
+            steps {
+                script {
+                    def version = sh(script: "cat package.json | jq -r .version", returnStdout: true).trim()
+
+                    // Check if the tag exists locally and delete it if found
+                    def tagExists = sh(script: "git tag -l v${version}", returnStdout: true).trim()
+                    
+                    if (tagExists) {
+                        echo "Deleting local tag v${version}..."
+                        sh "git tag -d v${version}"
+                    }
+                }
+            }
+        }
+
         stage('Push Version and Tag to Git') {
             steps {
                 script {
                     def version = sh(script: "cat package.json | jq -r .version", returnStdout: true).trim()
 
-                    // Check if the tag exists
-                    def tagExists = sh(script: "git tag -l v${version}", returnStdout: true).trim()
-                    
-                    if (tagExists) {
-                        echo "Tag v${version} already exists. Skipping tag creation."
-                    } else {
-                        sh '''
-                          git add package.json
-                          git commit -m "chore(release): bump version to v${version}"
-                          
-                          # Push changes and tag
-                          git push origin main
-                          git tag -a v${version} -m "Release v${version}"
-                          git push origin v${version}
-                        '''
-                    }
+                    // After deleting local tag, proceed with creating and pushing it
+                    sh '''
+                      git add package.json
+                      git commit -m "chore(release): bump version to v${version}"
+                      git push origin main
+                      git tag -a v${version} -m "Release v${version}"
+                      git push origin v${version}
+                    '''
                 }
             }
         }
