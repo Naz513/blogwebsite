@@ -89,16 +89,18 @@ pipeline {
                 script {
                     def version = sh(script: "cat package.json | jq -r .version", returnStdout: true).trim()
 
-                    // Force the commit and tag push, regardless of changes
-                    sh '''
-                      git add package.json || true
-                      git commit -m "chore(release): bump version to v${version}" || true
-                      
-                      # Push changes and tag
-                      git push origin main
-                      git tag -a v${version} -m "Release v${version}"
-                      git push origin v${version}
-                    '''
+                    // Force the commit and tag push, using credentials
+                    withCredentials([usernamePassword(credentialsId: 'git-credentials', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+                        sh '''
+                          git add package.json || true
+                          git commit -m "chore(release): bump version to v${version}" || true
+                          
+                          # Push changes and tag using credentials
+                          git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Naz513/blogwebsite.git main
+                          git tag -a v${version} -m "Release v${version}"
+                          git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Naz513/blogwebsite.git v${version}
+                        '''
+                    }
                 }
             }
         }
