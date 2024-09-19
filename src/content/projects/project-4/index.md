@@ -1,6 +1,6 @@
 ---
-title: "Implementing Semantic Versioning in My Astro Website with Jenkins"
-description: "Learn how I automated semantic versioning for my Astro website using a Jenkins pipeline."
+title: "Implementing Semantic Versioning on my Website with Jenkins"
+description: "Learn how I automated semantic versioning for my website using a Jenkins pipeline."
 date: "Sep 19 2024"
 demoURL: "https://www.mohdsaquib.com"
 repoURL: "https://github.com/Naz513/blogwebsite/blob/main/Jenkinsfile"
