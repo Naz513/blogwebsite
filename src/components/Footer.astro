@@ -1,8 +1,10 @@
 ---
 import Container from "@components/Container.astro";
 import { SITE } from "@consts";
+import { getTag } from "@utils/getTag";
 
 const currentYear = new Date().getFullYear();
+const tag = getTag();
 ---
 
 <footer class="animate">
@@ -11,6 +13,7 @@ const currentYear = new Date().getFullYear();
       &copy; {currentYear}
       {`|`}
       {SITE.NAME}
+      <span class="text-right text-xs text-gray-400">{tag}</span>
     </div>
   </Container>
 </footer>
