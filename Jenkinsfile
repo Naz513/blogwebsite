@@ -7,17 +7,13 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                // Checkout the code using the correct Git credentials
                 git branch: 'main', credentialsId: 'git-credentials', url: 'https://github.com/Naz513/blogwebsite.git'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                // Verify the contents of the workspace
                 sh 'ls -la'
-                
-                // Install the necessary dependencies
                 sh 'npm install'
             }
         }
@@ -36,7 +32,6 @@ pipeline {
 
         stage('Clean Working Directory') {
             steps {
-                // Clean local Git workspace before continuing
                 sh 'git reset --hard'
                 sh 'git clean -fdx'
             }
@@ -53,7 +48,6 @@ pipeline {
             steps {
                 script {
                     def commitMsg = sh(script: 'git log -1 --pretty=%B', returnStdout: true).trim()
-
                     if (commitMsg == null || commitMsg.trim().isEmpty()) {
                         echo 'No commit message found. Skipping version bump.'
                     } else {
@@ -95,10 +89,11 @@ pipeline {
                 script {
                     def version = sh(script: "cat package.json | jq -r .version", returnStdout: true).trim()
 
-                    // After deleting local tag, proceed with creating and pushing it
                     sh '''
                       git add package.json
                       git commit -m "chore(release): bump version to v${version}"
+                      
+                      # Push changes and tag
                       git push origin main
                       git tag -a v${version} -m "Release v${version}"
                       git push origin v${version}
