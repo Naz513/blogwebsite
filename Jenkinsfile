@@ -3,12 +3,12 @@ pipeline {
   tools {
     nodejs 'Node' // Ensure this matches the NodeJS installation name in Jenkins
   }
-  
+
   stages {
     stage('Checkout Code') {
       steps {
-        // Checkout the code from the specified Git repo and branch
-        git branch: 'main', credentialsId: "${GIT_CREDENTIALS}", url: 'https://github.com/Naz513/blogwebsite.git'
+        // Checkout the code using the correct Git credentials
+        git branch: 'main', credentialsId: 'git-credentials', url: 'https://github.com/Naz513/blogwebsite.git'
       }
     }
 
@@ -17,18 +17,17 @@ pipeline {
         // Verify the contents of the workspace
         sh 'ls -la'
         
-        // Install the necessary dependencies, including conventional-changelog packages
+        // Install the necessary dependencies
         sh 'npm install'
       }
     }
 
     stage('Determine Version Bump') {
       steps {
-        // Analyze commit messages and bump version accordingly (major, minor, or patch)
         script {
           def commitMsg = sh(script: 'git log -1 --pretty=%B', returnStdout: true).trim()
-          
-          // Check if commit message contains 'BREAKING CHANGE', 'feat', or 'fix' to bump the version accordingly
+
+          // Check if commit message contains 'BREAKING CHANGE', 'feat', or 'fix'
           if (commitMsg.contains('BREAKING CHANGE')) {
             echo 'Bumping Major version...'
             sh 'npm version major'
@@ -54,10 +53,9 @@ pipeline {
 
     stage('Push Version and Tag to Git') {
       steps {
-        // Push the version bump and tag to the Git repository
         script {
           def version = sh(script: "cat package.json | jq -r .version", returnStdout: true).trim()
-          
+
           sh '''
             git config user.name "Jenkins CI"
             git config user.email "jenkins@ci.com"
@@ -74,7 +72,7 @@ pipeline {
       }
     }
   }
-  
+
   post {
     success {
       echo 'Release process completed successfully!'
