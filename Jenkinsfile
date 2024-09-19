@@ -84,14 +84,15 @@ pipeline {
             }
         }
 
-        stage('Push Version and Tag to Git') {
+        stage('Force Push Version and Tag to Git') {
             steps {
                 script {
                     def version = sh(script: "cat package.json | jq -r .version", returnStdout: true).trim()
 
+                    // Force the commit and tag push, regardless of changes
                     sh '''
-                      git add package.json
-                      git commit -m "chore(release): bump version to v${version}"
+                      git add package.json || true
+                      git commit -m "chore(release): bump version to v${version}" || true
                       
                       # Push changes and tag
                       git push origin main
