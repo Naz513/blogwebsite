@@ -7,31 +7,24 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
+                // Checkout the code using the correct Git credentials
                 git branch: 'main', credentialsId: 'git-credentials', url: 'https://github.com/Naz513/blogwebsite.git'
             }
         }
 
         stage('Install Dependencies') {
             steps {
+                // Verify the contents of the workspace
                 sh 'ls -la'
+                
+                // Install the necessary dependencies
                 sh 'npm install'
-            }
-        }
-
-        stage('Install jq') {
-            steps {
-                sh '''
-                if ! command -v jq &> /dev/null
-                then
-                    echo "jq not found, installing..."
-                    apt-get update && apt-get install -y jq
-                fi
-                '''
             }
         }
 
         stage('Clean Working Directory') {
             steps {
+                // Ensure Git working directory is clean before bumping the version
                 sh 'git reset --hard'
                 sh 'git clean -fdx'
             }
@@ -39,6 +32,7 @@ pipeline {
 
         stage('Configure Git Identity') {
             steps {
+                // Configure the Git user name and email for Jenkins commits
                 sh 'git config user.name "Mohd Saquib"'
                 sh 'git config user.email "nsaquib96@gmail.com"'
             }
@@ -48,9 +42,11 @@ pipeline {
             steps {
                 script {
                     def commitMsg = sh(script: 'git log -1 --pretty=%B', returnStdout: true).trim()
+
                     if (commitMsg == null || commitMsg.trim().isEmpty()) {
                         echo 'No commit message found. Skipping version bump.'
                     } else {
+                        // Check if commit message contains 'BREAKING CHANGE', 'feat', or 'fix'
                         if (commitMsg.contains('BREAKING CHANGE')) {
                             echo 'Bumping Major version...'
                             sh 'npm version major'
@@ -72,11 +68,11 @@ pipeline {
             steps {
                 script {
                     def version = sh(script: "cat package.json | jq -r .version", returnStdout: true).trim()
-
-                    // Check if the tag exists locally and delete it if found
-                    def tagExists = sh(script: "git tag -l v${version}", returnStdout: true).trim()
                     
-                    if (tagExists) {
+                    // Check if the tag exists locally
+                    def localTagExists = sh(script: "git tag -l v${version}", returnStdout: true).trim()
+                    
+                    if (localTagExists) {
                         echo "Deleting local tag v${version}..."
                         sh "git tag -d v${version}"
                     }
@@ -97,6 +93,8 @@ pipeline {
                           
                           # Push changes and tag using credentials
                           git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Naz513/blogwebsite.git main
+                          
+                          # Create the correct version tag
                           git tag -a v${version} -m "Release v${version}"
                           git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Naz513/blogwebsite.git v${version}
                         '''
