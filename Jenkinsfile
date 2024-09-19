@@ -1,18 +1,12 @@
 pipeline {
   agent any
   tools {
-    nodejs 'Node' // Ensure this matches the NodeJS installation name in Jenkins
+    nodejs 'Node' // This should match the NodeJS installation name
   }
-  
-  environment {
-    GIT_CREDENTIALS = credentials('git-credentials') // Ensure you have the right Git credentials set up in Jenkins
-  }
-  
   stages {
-    stage('Checkout Code') {
+    stage('Checkout') {
       steps {
-        // Checkout the code from the specified Git repo and branch
-        git branch: 'main', credentialsId: "${GIT_CREDENTIALS}", url: 'https://github.com/Naz513/blogwebsite.git'
+        git(url: 'https://github.com/Naz513/blogwebsite.git', branch: 'main')
       }
     }
 
@@ -20,71 +14,26 @@ pipeline {
       steps {
         // Verify the contents of the workspace
         sh 'ls -la'
-        
-        // Install the necessary dependencies, including conventional-changelog packages
-        sh 'npm install'
-      }
-    }
 
-    stage('Determine Version Bump') {
-      steps {
-        // Analyze commit messages and bump version accordingly (major, minor, or patch)
-        script {
-          def commitMsg = sh(script: 'git log -1 --pretty=%B', returnStdout: true).trim()
-          
-          // Check if commit message contains 'BREAKING CHANGE', 'feat', or 'fix' to bump the version accordingly
-          if (commitMsg.contains('BREAKING CHANGE')) {
-            echo 'Bumping Major version...'
-            sh 'npm version major'
-          } else if (commitMsg.startsWith('feat')) {
-            echo 'Bumping Minor version...'
-            sh 'npm version minor'
-          } else if (commitMsg.startsWith('fix')) {
-            echo 'Bumping Patch version...'
-            sh 'npm version patch'
-          } else {
-            echo 'No version bump required.'
-          }
-        }
+        // Install the necessary dependencies
+        sh 'npm install'
       }
     }
 
     stage('Build Astro Code') {
       steps {
-        // Run the Astro build process
+        // Run the build process
         sh 'npm run build'
       }
     }
 
-    stage('Push Version and Tag to Git') {
+    stage('Save Artifacts') {
       steps {
-        // Push the version bump and tag to the Git repository
-        script {
-          def version = sh(script: "cat package.json | jq -r .version", returnStdout: true).trim()
-          
-          sh '''
-            git config user.name "Jenkins CI"
-            git config user.email "jenkins@ci.com"
-            
-            git add package.json
-            git commit -m "chore(release): bump version to v${version}"
-            
-            # Push changes and tag
-            git push origin main
-            git tag -a v${version} -m "Release v${version}"
-            git push origin v${version}
-          '''
-        }
+        // SCP the artifacts to another computer
+        sh '''
+          scp -r ./dist naz@100.108.100.79:/blog
+        '''
       }
-    }
-  }
-  
-  post {
-    success {
-      echo 'Release process completed successfully!'
-    }
-    failure {
-      echo 'Release process failed!'
     }
   }
 }
