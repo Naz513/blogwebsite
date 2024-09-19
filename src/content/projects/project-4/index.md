@@ -8,10 +8,10 @@ tags: ["Semantic Versioning", "Jenkins"]
 ---
 
 ## Overview
-In this post, I explain how I implemented **semantic versioning** for my website using Jenkins. Semantic Versioning, often referred to as SemVer, is a versioning system used to communicate changes in software in a clear and predictable way. It helps manage and track changes in a consistent and predictable manner, allowing for more organized releases and easier collaboration. I built a Jenkins pipeline that automates version bumping based on commit messages, streamlining the deployment process of my site.
+In this post, I explain how I implemented **semantic versioning** for my website using Jenkins. Semantic Versioning, often referred to as SemVer, is a versioning system used to communicate changes in software in a clear and predictable way. It helps manage and track changes in a consistent and predictable manner, allowing for more organized releases and easier collaboration. I wanted to do the same for this website and track its versioning overtime. And to do that, I built a Jenkins pipeline that automates version bumping based on commit messages, streamlining the deployment process of my site.
 
 ## Pipeline Overview
-The Jenkinsfile automates the versioning and deployment process of the website. Below is a breakdown of how the pipeline stages work:
+The Jenkinsfile that can be accessed using the git repo, automates the versioning and deployment process of the website. Below is a breakdown of how the pipeline stages work:
 
 ### 1. Checkout Code
 The pipeline starts by checking out the latest code from the main branch of my GitHub repository using configured Git credentials. This step ensures that Jenkins works with the most up-to-date codebase.
