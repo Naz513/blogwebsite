@@ -3,7 +3,7 @@ title: "Event-Driven COVID-19 ETL Pipeline Using AWS Services and Python"
 description: "Automated COVID-19 ETL pipeline using AWS services and Python in a serverless architecture."
 date: "Aug 28 2020"
 repoURL: "https://github.com/Naz513/mohdsaquib.com"
-tags: ["AWS", "S3", "Python", "Serverless", "Lambda", "DynamoDB", "AWS Glue"]
+tags: ["S3", "Python", "Lambda", "DynamoDB", "AWS Glue"]
 ---
 After earning my AWS SAA certification, I was eager to apply my skills in real-world projects. So, when I came across a challenge from A Cloud Guru, I jumped in without hesitation. The past few weeks have been a blend of fun and learning as I worked on this project, and I'm excited to share the experience.
 
