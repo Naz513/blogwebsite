@@ -22,6 +22,19 @@ pipeline {
             }
         }
 
+        stage('Install jq') {
+            steps {
+                // Install jq if it's not already available
+                sh '''
+                if ! command -v jq &> /dev/null
+                then
+                    echo "jq not found, installing..."
+                    apt-get update && apt-get install -y jq
+                fi
+                '''
+            }
+        }
+
         stage('Clean Working Directory') {
             steps {
                 // Ensure Git working directory is clean before bumping the version
