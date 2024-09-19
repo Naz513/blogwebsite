@@ -4,10 +4,6 @@ pipeline {
     nodejs 'Node' // Ensure this matches the NodeJS installation name in Jenkins
   }
   
-  environment {
-    GIT_CREDENTIALS = credentials('git-credentials') // Ensure you have the right Git credentials set up in Jenkins
-  }
-  
   stages {
     stage('Checkout Code') {
       steps {
