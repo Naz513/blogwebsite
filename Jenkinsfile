@@ -64,23 +64,23 @@ pipeline {
             }
         }
 
-        // stage('Delete Existing Local Tag') {
-        //     steps {
-        //         script {
-        //             def version = sh(script: "cat package.json | jq -r .version", returnStdout: true).trim()
+        stage('Delete Existing Local Tag') {
+            steps {
+                script {
+                    def version = sh(script: "cat package.json | jq -r .version", returnStdout: true).trim()
 
-        //             // Check if the tag exists locally and delete it if needed
-        //             def tagExists = sh(script: "git tag -l v${version}", returnStdout: true).trim()
+                    // Check if the tag exists locally and delete it if needed
+                    def tagExists = sh(script: "git tag -l v${version}", returnStdout: true).trim()
                     
-        //             if (tagExists) {
-        //                 echo "Deleting local tag v${version}..."
-        //                 sh "git tag -d v${version}"
-        //             } else {
-        //                 echo "No local tag v${version} found."
-        //             }
-        //         }
-        //     }
-        // }
+                    if (tagExists) {
+                        echo "Deleting local tag v${version}..."
+                        sh "git tag -d v${version}"
+                    } else {
+                        echo "No local tag v${version} found."
+                    }
+                }
+            }
+        }
 
         stage('Push Version and Tag to Git') {
             steps {
