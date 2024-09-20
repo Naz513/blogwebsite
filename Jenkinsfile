@@ -19,7 +19,7 @@ pipeline {
                 
                 // Install the necessary dependencies
                 sh 'npm install'
-            }
+                
                 script {
                     // Check if jq is installed, if not install it
                     def isJqInstalled = sh(script: 'command -v jq', returnStatus: true)
@@ -27,33 +27,19 @@ pipeline {
                         echo 'jq is not installed. Installing jq...'
                         // Install jq
                         sh '''
-                            apt-get update && apt-get install -y jq
- 
+                            if [ -x "$(command -v apt-get)" ]; then
+                                sudo apt-get update && sudo apt-get install -y jq
+                            else
+                                echo "Unsupported package manager. Please install jq manually."
+                                exit 1
+                            fi
                         '''
                     } else {
                         echo 'jq is already installed.'
                     }
                 }
+            }
         }
-
-        // stage('Check jq Installation') {
-        //     steps {
-        //         script {
-        //             // Check if jq is installed, if not install it
-        //             def isJqInstalled = sh(script: 'command -v jq', returnStatus: true)
-        //             if (isJqInstalled != 0) {
-        //                 echo 'jq is not installed. Installing jq...'
-        //                 // Install jq
-        //                 sh '''
-        //                     apt-get update && apt-get install -y jq
- 
-        //                 '''
-        //             } else {
-        //                 echo 'jq is already installed.'
-        //             }
-        //         }
-        //     }
-        // }
 
         stage('Clean Working Directory') {
             steps {
