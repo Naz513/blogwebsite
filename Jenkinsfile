@@ -27,6 +27,16 @@ pipeline {
             }
         }
 
+        stage('Configure Git Identity') {
+            steps {
+                // Configure the Git user name and email for Jenkins commits
+                sh '''
+                    git config user.name "Mohd Saquib"
+                    git config user.email "nsaquib96@gmail.com"
+                '''
+            }
+        }
+
         stage('Determine Version Bump') {
             steps {
                 script {
@@ -59,12 +69,6 @@ pipeline {
         stage('Push Version and Tag to Git') {
             steps {
                 script {
-                    // Configure Git user for commits
-                    sh '''
-                        git config user.name "Mohd Saquib"
-                        git config user.email "nsaquib96@gmail.com"
-                    '''
-
                     // Use SSH credentials for secure Git operations
                     sshagent(['git-credentials']) {
                         sh 'git push origin main --follow-tags'
