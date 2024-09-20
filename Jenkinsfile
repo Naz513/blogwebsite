@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        nodejs 'Node'
+        nodejs 'Node' 
     }
 
     stages {
@@ -14,13 +14,8 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 sh 'npm ci'
-            }
-        }
-
-        stage('Check jq Installation') {
-            steps {
+                
                 script {
-                    // Check if jq is installed, if not install it
                     def isJqInstalled = sh(script: 'command -v jq', returnStatus: true)
                     if (isJqInstalled != 0) {
                         sh '''
@@ -73,6 +68,24 @@ pipeline {
                         } else {
                             echo 'No version bump required.'
                         }
+                    }
+                }
+            }
+        }
+
+        stage('Delete Existing Local Tag') {
+            steps {
+                script {
+                    def version = sh(script: "cat package.json | jq -r .version", returnStdout: true).trim()
+
+                    // Check if the tag exists locally and delete it if needed
+                    def tagExists = sh(script: "git tag -l v${version}", returnStdout: true).trim()
+                    
+                    if (tagExists) {
+                        echo "Deleting local tag v${version}..."
+                        sh "git tag -d v${version}"
+                    } else {
+                        echo "No local tag v${version} found."
                     }
                 }
             }
