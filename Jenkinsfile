@@ -69,9 +69,10 @@ pipeline {
         stage('Push Version and Tag to Git') {
             steps {
                 script {
-                    // Use SSH credentials for secure Git operations
-                    sshagent(['git-credentials']) {
-                        sh 'git push origin main --follow-tags'
+                    withCredentials([usernamePassword(credentialsId: 'git-credentials', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                        sh '''
+                            git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Naz513/blogwebsite.git main --follow-tags
+                        '''
                     }
                 }
             }
