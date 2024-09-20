@@ -100,13 +100,13 @@ pipeline {
 
                         // Upload the built artifact (adjust the path to your build output)
                         sh """
-                            upload_url=$(curl -H "Authorization: token ${GIT_PASSWORD}" \
-                                            https://api.github.com/repos/Naz513/blogwebsite/releases/tags/v${version} \
-                                            | jq -r '.upload_url' | sed -e "s/{?name,label}//")
+                            upload_url=\$(curl -H "Authorization: token ${GIT_PASSWORD}" \
+                                                https://api.github.com/repos/Naz513/blogwebsite/releases/tags/v${version} \
+                                                | jq -r '.upload_url' | sed -e "s/{?name,label}//")
                             curl -H "Authorization: token ${GIT_PASSWORD}" \
                                  -H "Content-Type: application/zip" \
                                  --data-binary @path/to/your/built/artifact.zip \
-                                 "$upload_url?name=artifact.zip"
+                                 "\${upload_url}?name=artifact.zip"
                         """
                     }
                 }
