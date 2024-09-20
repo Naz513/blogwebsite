@@ -61,7 +61,7 @@ jobs:
       - name: Push new tag
         if: success()
         run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
+          git config user.name "Mohd Saquib"
+          git config user.email "nsaquib96@gmail.com"
           git tag ${{ env.tag }}
           git push origin ${{ env.tag }}
