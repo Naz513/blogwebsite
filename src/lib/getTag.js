@@ -8,6 +8,6 @@ export function getTag() {
     return tag ? tag : 'No Tag';
   } catch (error) {
     console.error('Error fetching Git tag:', error);
-    return 'No Tag';
+    return 'Unable to Retrive Version';
   }
 }
