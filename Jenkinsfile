@@ -63,9 +63,9 @@ pipeline {
 
         stage('Build Project') {
             steps {
-                // Debug step to check node_modules and PATH
-                sh 'ls -la node_modules/.bin'
-                sh 'echo $PATH'
+                // // Debug step to check node_modules and PATH
+                // sh 'ls -la node_modules/.bin'
+                // sh 'echo $PATH'
                 
                 // Run Astro using npx to ensure it uses the local node_modules version
                 sh 'npx --no-install astro check && npx --no-install astro build'
