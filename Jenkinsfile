@@ -1,13 +1,12 @@
 pipeline {
     agent any
     tools {
-        nodejs 'Node' // Ensure this matches the NodeJS installation name in Jenkins
+        nodejs 'Node'
     }
 
     stages {
         stage('Checkout Code') {
             steps {
-                // Checkout the code using the correct Git credentials
                 git branch: 'main', credentialsId: 'git-credentials', url: 'https://github.com/Naz513/blogwebsite.git'
             }
         }
@@ -24,8 +23,6 @@ pipeline {
                     // Check if jq is installed, if not install it
                     def isJqInstalled = sh(script: 'command -v jq', returnStatus: true)
                     if (isJqInstalled != 0) {
-                        echo 'jq is not installed. Installing jq...'
-                        // Install jq based on the system package manager
                         sh '''
                             if [ -x "$(command -v apt-get)" ]; then
                                 apt-get update && apt-get install -y jq
@@ -43,7 +40,6 @@ pipeline {
 
         stage('Clean Working Directory') {
             steps {
-                // Ensure Git working directory is clean before bumping the version
                 sh 'git reset --hard'
                 sh 'git clean -fdx'
             }
@@ -51,7 +47,6 @@ pipeline {
 
         stage('Configure Git Identity') {
             steps {
-                // Configure the Git user name and email for Jenkins commits
                 sh 'git config user.name "Mohd Saquib"'
                 sh 'git config user.email "nsaquib96@gmail.com"'
             }
@@ -87,8 +82,6 @@ pipeline {
             steps {
                 script {
                     def version = sh(script: "cat package.json | jq -r .version", returnStdout: true).trim()
-
-                    // Use credentials to push the tag
                     withCredentials([usernamePassword(credentialsId: 'git-credentials', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                         sh """
                             git add .
