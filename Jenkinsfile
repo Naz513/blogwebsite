@@ -22,13 +22,13 @@ pipeline {
             }
         }
 
-        // stage('Clean Working Directory') {
-        //     steps {
-        //         // Ensure Git working directory is clean before bumping the version
-        //         sh 'git reset --hard'
-        //         sh 'git clean -fdx'
-        //     }
-        // }
+        stage('Clean Working Directory') {
+            steps {
+                // Ensure Git working directory is clean before bumping the version
+                sh 'git reset --hard'
+                sh 'git clean -fdx'
+            }
+        }
 
         stage('Configure Git Identity') {
             steps {
