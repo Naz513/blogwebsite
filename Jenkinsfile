@@ -20,9 +20,6 @@ pipeline {
                 // Install the necessary dependencies
                 sh 'npm install'
             }
-        }
-
-        stage('Check jq Installation') {
             steps {
                 script {
                     // Check if jq is installed, if not install it
@@ -40,6 +37,25 @@ pipeline {
                 }
             }
         }
+
+        // stage('Check jq Installation') {
+        //     steps {
+        //         script {
+        //             // Check if jq is installed, if not install it
+        //             def isJqInstalled = sh(script: 'command -v jq', returnStatus: true)
+        //             if (isJqInstalled != 0) {
+        //                 echo 'jq is not installed. Installing jq...'
+        //                 // Install jq
+        //                 sh '''
+        //                     apt-get update && apt-get install -y jq
+ 
+        //                 '''
+        //             } else {
+        //                 echo 'jq is already installed.'
+        //             }
+        //         }
+        //     }
+        // }
 
         stage('Clean Working Directory') {
             steps {
@@ -78,6 +94,24 @@ pipeline {
                         } else {
                             echo 'No version bump required.'
                         }
+                    }
+                }
+            }
+        }
+
+        stage('Delete Existing Local Tag') {
+            steps {
+                script {
+                    def version = sh(script: "cat package.json | jq -r .version", returnStdout: true).trim()
+
+                    // Check if the tag exists locally and delete it if needed
+                    def tagExists = sh(script: "git tag -l v${version}", returnStdout: true).trim()
+                    
+                    if (tagExists) {
+                        echo "Deleting local tag v${version}..."
+                        sh "git tag -d v${version}"
+                    } else {
+                        echo "No local tag v${version} found."
                     }
                 }
             }
