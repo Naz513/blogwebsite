@@ -28,7 +28,7 @@ pipeline {
                         // Install jq based on the system package manager
                         sh '''
                             if [ -x "$(command -v apt-get)" ]; then
-                                sudo apt-get update && sudo apt-get install -y jq
+                                apt-get update && apt-get install -y jq
                             else
                                 echo "Please install jq manually."
                                 exit 1
