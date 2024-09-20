@@ -31,7 +31,7 @@ pipeline {
                         echo 'jq is not installed. Installing jq...'
                         // Install jq
                         sh '''
-                            apt-get install -y jq
+                            apt-get update && apt-get install -y jq
  
                         '''
                     } else {
