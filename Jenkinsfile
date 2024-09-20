@@ -20,7 +20,6 @@ pipeline {
                 // Install the necessary dependencies
                 sh 'npm install'
             }
-            steps {
                 script {
                     // Check if jq is installed, if not install it
                     def isJqInstalled = sh(script: 'command -v jq', returnStatus: true)
@@ -35,7 +34,6 @@ pipeline {
                         echo 'jq is already installed.'
                     }
                 }
-            }
         }
 
         // stage('Check jq Installation') {
