@@ -1,6 +1,6 @@
 ---
 company: "Booz Allen Hamilton"
-role: "Cloud Solutions Architect, Consultant"
+role: "Cloud Solutions Architect, Senior Consultant"
 dateStart: "02/20/2021"
 dateEnd: "Current"
 location: "Remote"
