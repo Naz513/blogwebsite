@@ -51,7 +51,7 @@ jobs:
 
   test:
     needs: build
-    timeout-minutes: 2
+    timeout-minutes: 1
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -77,7 +77,7 @@ jobs:
       - name: Start the application
         run: npm run preview &
       - name: Wait for server to start
-        run: sleep 5 
+        run: sleep 2 
       - name: Run Playwright tests
         run: npx playwright test
       - uses: actions/upload-artifact@v4
