@@ -1,7 +1,7 @@
 export type Site = {
   NAME: string;
   EMAIL: string;
-  TITLE: String;
+  TITLE: string;
   LOCATION: string;
   NUM_POSTS_ON_HOMEPAGE: number;
   NUM_WORKS_ON_HOMEPAGE: number;

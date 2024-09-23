@@ -33,6 +33,8 @@
     "typescript": "^5.4.2"
   },
   "devDependencies": {
+    "@playwright/test": "^1.47.2",
+    "@types/node": "^22.5.5",
     "astro": "^4.15.8"
   }
 }
